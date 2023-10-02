@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Phonebook.hpp"
+#include "SetColor.hpp"
 
 void print_header() {
   std::cout << "\033[1;34m";
@@ -23,8 +24,8 @@ void repl(Phonebook phonebook) {
     else if (input == "EXIT") {
       break;
     } else {
-      std::cout
-          << "Invalid command! The only valid commands are: ADD SEARCH EXIT\n";
+      std::cout << SetRedColor(
+          "Invalid command! The only valid commands are: ADD SEARCH EXIT\n");
     }
   }
 }

@@ -12,6 +12,8 @@ class Phonebook {
   std::string GetShortField(std::string field);
   void DisplayContactShort(int index, Contact contact);
   void DisplayContactFull(Contact contact);
+  void DisplayContactList();
+  void SearchIndex();
 
  public:
   Phonebook();

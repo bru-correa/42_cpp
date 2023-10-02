@@ -4,22 +4,24 @@
 #include <iomanip>
 #include <string>
 
+#include "SetColor.hpp"
+
 Phonebook::Phonebook() : oldest_entry_(0) {}
 
 void Phonebook::Add() {
-  std::cout << "First Name: ";
+  std::cout << SetBlueColor("First Name: ");
   std::string first_name;
   std::getline(std::cin, first_name);
-  std::cout << "Last Name: ";
+  std::cout << SetBlueColor("Last Name: ");
   std::string last_name;
   std::getline(std::cin, last_name);
-  std::cout << "Nickname: ";
+  std::cout << SetBlueColor("Nickname: ");
   std::string nickname;
   std::getline(std::cin, nickname);
-  std::cout << "Number: ";
+  std::cout << SetBlueColor("Number: ");
   std::string number;
   std::getline(std::cin, number);
-  std::cout << "Secret: ";
+  std::cout << SetBlueColor("Secret: ");
   std::string secret;
   std::getline(std::cin, secret);
 
@@ -32,21 +34,29 @@ void Phonebook::Add() {
 
 void Phonebook::Search() {
   if (contacts_[0].IsValid() == false) {
-    std::cout << "There is no contact, try adding one with ADD command\n";
+    std::cout << SetRedColor(
+        "There is no contact, try adding one with ADD command\n");
     return;
   }
-  std::cout << std::right << std::setw(10) << "Index"
-            << "|";
-  std::cout << std::right << std::setw(10) << "First Name"
-            << "|";
-  std::cout << std::right << std::setw(10) << "Last Name"
-            << "|";
-  std::cout << std::right << std::setw(10) << "Nickname\n";
+  DisplayContactList();
+  SearchIndex();
+}
+
+// Private
+
+void Phonebook::DisplayContactList() {
+  std::cout << std::right << std::setw(10) << SetBlueColor("Index") << "|";
+  std::cout << std::right << std::setw(10) << SetBlueColor("First Name") << "|";
+  std::cout << std::right << std::setw(10) << SetBlueColor("Last Name") << "|";
+  std::cout << std::right << std::setw(10) << SetBlueColor("Nickname\n");
   for (int i = 0; i < 8; i++) {
     if (contacts_[i].IsValid()) {
       DisplayContactShort(i, contacts_[i]);
     }
   }
+}
+
+void Phonebook::SearchIndex() {
   int index = -1;
   while (index == -1) {
     std::string input;
@@ -54,8 +64,8 @@ void Phonebook::Search() {
     std::getline(std::cin, input);
     index = input[0] - '0';
     if (input.length() > 1 || (index < 0 || index > 8)) {
-      std::cout
-          << "Invalid input. You must type a valid number between 0 and 8\n";
+      std::cout << SetRedColor(
+          "Invalid input. You must type a valid number between 0 and 8\n");
       index = -1;
       continue;
     }
@@ -63,7 +73,7 @@ void Phonebook::Search() {
       DisplayContactFull(contacts_[index]);
       break;
     } else {
-      std::cout << "There is no contact with this index\n";
+      std::cout << SetRedColor("There is no contact with this index\n");
       index = -1;
     }
   }
@@ -86,9 +96,9 @@ void Phonebook::DisplayContactShort(int index, Contact contact) {
 }
 
 void Phonebook::DisplayContactFull(Contact contact) {
-  std::cout << "First Name: " << contact.get_first_name() << "\n";
-  std::cout << "Last Name: " << contact.get_last_name() << "\n";
-  std::cout << "Nickname: " << contact.get_nickname() << "\n";
-  std::cout << "Number: " << contact.get_number() << "\n";
-  std::cout << "Secret: " << contact.get_secret() << "\n";
+  std::cout << SetBlueColor("First Name: ") << contact.get_first_name() << "\n";
+  std::cout << SetBlueColor("Last Name: ") << contact.get_last_name() << "\n";
+  std::cout << SetBlueColor("Nickname: ") << contact.get_nickname() << "\n";
+  std::cout << SetBlueColor("Number: ") << contact.get_number() << "\n";
+  std::cout << SetBlueColor("Secret: ") << contact.get_secret() << "\n";
 }
