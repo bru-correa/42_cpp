@@ -1,6 +1,7 @@
-phonebook
+Phonebook
 obj
 debug
 .clang-format
 CPPLINT.cfg
 compile_flags.txt
+setup_dev.sh
