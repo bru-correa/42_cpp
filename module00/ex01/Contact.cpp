@@ -1,4 +1,6 @@
-#include "./Contact.hpp"
+#include "Contact.hpp"
+
+#include <iomanip>
 
 Contact::Contact() {
   first_name_ = "";
@@ -9,13 +11,12 @@ Contact::Contact() {
 }
 
 Contact::Contact(std::string first_name, std::string last_name,
-                 std::string nickname, std::string number, std::string secret) {
-  first_name_ = first_name;
-  last_name_ = last_name;
-  nickname_ = nickname;
-  number_ = number;
-  secret_ = secret;
-}
+                 std::string nickname, std::string number, std::string secret)
+    : first_name_(first_name),
+      last_name_(last_name),
+      nickname_(nickname),
+      number_(number),
+      secret_(secret) {}
 
 std::string Contact::get_first_name() { return first_name_; }
 std::string Contact::get_last_name() { return last_name_; }
@@ -31,10 +32,10 @@ void Contact::set_nickname(std::string nickname) { nickname_ = nickname; }
 void Contact::set_number(std::string number) { number_ = number; }
 void Contact::set_secret(std::string secret) { secret_ = secret; }
 
-void Contact::Print() {
-  std::cout << first_name_ << '\n';
-  std::cout << last_name_ << '\n';
-  std::cout << nickname_ << '\n';
-  std::cout << number_ << '\n';
-  std::cout << secret_ << '\n';
+bool Contact::IsValid() {
+  if (first_name_.empty() || last_name_.empty() || nickname_.empty())
+    return (false);
+  else if (number_.empty() || secret_.empty())
+    return (false);
+  return (true);
 }

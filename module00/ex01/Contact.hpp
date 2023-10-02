@@ -22,7 +22,7 @@ class Contact {
   void set_number(std::string number);
   void set_secret(std::string secret);
 
-  void Print();
+  bool IsValid();
 
  private:
   std::string first_name_;
