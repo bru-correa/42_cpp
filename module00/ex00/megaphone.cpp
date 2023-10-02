@@ -11,6 +11,8 @@ int main(int argc, char *argv[]) {
   }
   for (int i = 1; i < argc; i++) {
     print_uppercase(argv[i]);
+    if (i < argc - 1)
+      std::cout << " ";
   }
   std::cout << "\n";
   return 0;
