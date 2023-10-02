@@ -1,40 +1,81 @@
-STD = -std=c++98
-CFLAGS = -Wall -Wextra -Werror $(STD) -I./
-OBJ_DIR = obj
-SRC_FILES = $(shell find ./ -type f -name '*.cpp')
-OBJ_FILES = $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC_FILES))
-NAME = phonebook
-MAIN = main.cpp
-VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
-VALGRIND += --track-origins=yes --quiet --tool=memcheck
+#GENERAL OPTIONS
+# C Compiler
+CC := c++
+# Compiler flags
+CFLAGS := -Wall -Wextra -Werror -std=c++98
+# Removal tool
+RM := rm -rf
 
-# all: $(OBJ_DIR) $(OBJ_FILES) $(MAIN)
-# 	c++ $(MAIN) $(CFLAGS) -o $(NAME)
 
-all: $(OBJ_DIR) $(OBJ_FILES)
-	c++ $(OBJ_FILES) -o $(NAME)
+# PROGRAM
+# Program name
+NAME := Phonebook
 
-$(NAME): all
+# Headers
+HEADER_DIR := .
+HEADER := Contact.hpp Phonebook.hpp SetColor.hpp
+H_INCLUDE := $(addprefix -I, $(HEADER_DIR))
 
+# Sources
+SRC_DIR := .
+SRC := Contact.cpp Phonebook.cpp SetColor.cpp main.cpp
+
+# Objects
+OBJ_DIR := obj
+OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+
+# Inclusions:
+INCLUDE := $(H_INCLUDE)
+
+# Development flag: set dev=1 to automatically find .cpp's and .hpp's
+ifeq ($(dev), 1)
+CFLAGS += -g -fsanitize=address -fno-omit-frame-pointer
+SRC := $(shell find . -name '*.cpp' -type f)
+SRC_DIR := $(dir $(SRC))
+SRC := $(notdir $(SRC))
+OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+HEADER := $(shell find . -name '*.hpp' -type f)
+H_INCLUDE := $(sort $(addprefix -I, $(dir $(HEADER))))
+INCLUDE := $(H_INCLUDE)
+endif
+
+# vpath
+vpath    %.hpp    $(HEADER_DIR)
+vpath    %.cpp    $(SRC_DIR)
+
+
+# -----------------------RULES------------------------------------------------ #
+.PHONY: all vg clean fclean re
+
+# Creates NAME
+all: $(NAME)
+
+# Compiles OBJ and LIBFT into the program NAME
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(INCLUDE)
+
+# Compiles SRC into OBJ
+$(OBJ): $(OBJ_DIR)/%.o: %.cpp $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
+
+# Directory making
 $(OBJ_DIR):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)%.c
-	c++ -c $< $(CFLAGS) -o $@
+# Run program using valgrind
+vg:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
+# Clean: removes objects' directory
 clean:
-	@rm -rf obj
+	$(RM) $(OBJ_DIR)
 
+# Full clean: removes objects' directory and generated programs
 fclean: clean
-	@rm -rf $(NAME)
+	$(RM) $(NAME)
 
+# Remake: full cleans and runs 'all' rule
 re: fclean all
 
 run: all
-	@./$(NAME)
-
-runv: all
-	@$(VALGRIND) ./$(NAME)
-
-setup_dev:
-	./setup_dev.sh
+	./$(NAME)

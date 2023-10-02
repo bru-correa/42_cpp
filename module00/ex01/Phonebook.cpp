@@ -45,10 +45,15 @@ void Phonebook::Search() {
 // Private
 
 void Phonebook::DisplayContactList() {
-  std::cout << std::right << std::setw(10) << SetBlueColor("Index") << "|";
-  std::cout << std::right << std::setw(10) << SetBlueColor("First Name") << "|";
-  std::cout << std::right << std::setw(10) << SetBlueColor("Last Name") << "|";
-  std::cout << std::right << std::setw(10) << SetBlueColor("Nickname\n");
+  SetBufferBlue();
+  std::cout << std::right << std::setw(10) << "Index"
+            << "|";
+  std::cout << std::right << std::setw(10) << "First Name"
+            << "|";
+  std::cout << std::right << std::setw(10) << "Last Name"
+            << "|";
+  std::cout << std::right << std::setw(10) << "Nickname\n";
+  ResetBufferColor();
   for (int i = 0; i < 8; i++) {
     if (contacts_[i].IsValid()) {
       DisplayContactShort(i, contacts_[i]);
