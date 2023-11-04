@@ -1,6 +1,5 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
-#endif  // !ZOMBIE_H
 
 #include <iostream>
 #include <string>
@@ -17,3 +16,5 @@ class Zombie {
 };
 
 Zombie* ZombieHorde(int N, std::string name);
+
+#endif  // !ZOMBIE_H
