@@ -11,11 +11,9 @@ class Zombie {
 
  public:
   Zombie();
-  ~Zombie();
   Zombie(std::string name);
+
   void Announce();
 };
 
-Zombie* NewZombie(std::string name);
-
-void RandomChump(std::string name);
+Zombie* ZombieHorde(int N, std::string name);

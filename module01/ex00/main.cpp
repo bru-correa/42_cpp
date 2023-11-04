@@ -5,10 +5,10 @@
 int main() {
   std::cout << "THE ZOMBIES ARE COMING!!!\n";
   Zombie zombieGilberto("GRomero");
-  zombieGilberto.announce();
+  zombieGilberto.Announce();
   RandomChump("MJThriller");
   Zombie* zombieBrainEater = NewZombie("BrainEater12");
-  zombieBrainEater->announce();
+  zombieBrainEater->Announce();
   delete zombieBrainEater;
   return 0;
 }
