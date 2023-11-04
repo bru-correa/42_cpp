@@ -9,7 +9,7 @@ RM := rm -rf
 
 # PROGRAM
 # Program name
-NAME := zombies
+NAME := brain
 
 # Headers
 HEADER_DIR := .

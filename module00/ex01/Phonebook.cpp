@@ -28,7 +28,8 @@ void Phonebook::Add() {
   Contact new_contact(first_name, last_name, nickname, number, secret);
   contacts_[oldest_entry_] = new_contact;
   oldest_entry_++;
-  if (oldest_entry_ >= 8) oldest_entry_ = 0;
+  if (oldest_entry_ >= 8)
+    oldest_entry_ = 0;
   std::cout << "Contact added\n";
 }
 

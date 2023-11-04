@@ -9,7 +9,7 @@ RM := rm -rf
 
 # PROGRAM
 # Program name
-NAME := zombies
+NAME := harl2
 
 # Headers
 HEADER_DIR := .
