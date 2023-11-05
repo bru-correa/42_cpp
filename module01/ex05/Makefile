@@ -9,7 +9,7 @@ RM := rm -rf
 
 # PROGRAM
 # Program name
-NAME := sad
+NAME := harl2
 
 # Headers
 HEADER_DIR := .
@@ -79,4 +79,4 @@ re: fclean all
 
 # Run the program
 run: all
-	@./test.sh
+	@./$(NAME)
