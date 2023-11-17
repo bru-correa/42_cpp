@@ -9,7 +9,7 @@ RM := rm -rf
 
 # PROGRAM
 # Program name
-NAME := third_class
+NAME := fixed
 
 # Headers
 HEADER_DIR := .
