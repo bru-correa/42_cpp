@@ -1,0 +1,7 @@
+bureaucrat
+*_shrubbery
+obj
+debug
+.clang-format
+CPPLINT.cfg
+compile_flags.txt
