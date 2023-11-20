@@ -1,0 +1,6 @@
+scalar
+obj
+debug
+.clang-format
+CPPLINT.cfg
+compile_flags.txt
