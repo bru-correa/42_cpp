@@ -9,7 +9,7 @@ RM := rm -rf
 
 # PROGRAM
 # Program name
-NAME := bitcoin
+NAME := btc
 
 # Headers
 HEADER_DIR := .
