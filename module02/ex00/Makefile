@@ -18,7 +18,7 @@ H_INCLUDE := $(addprefix -I, $(HEADER_DIR))
 
 # Sources
 SRC_DIR := .
-SRC := 
+SRC := main.cpp Fixed.cpp
 
 # Objects
 OBJ_DIR := obj
@@ -26,18 +26,6 @@ OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 # Inclusions:
 INCLUDE := $(H_INCLUDE)
-
-# Development flag: set dev=1 to automatically find .cpp's and .hpp's
-ifeq ($(dev), 1)
-CFLAGS += -g
-SRC := $(shell find . -name '*.cpp' -type f)
-SRC_DIR := $(dir $(SRC))
-SRC := $(notdir $(SRC))
-OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
-HEADER := $(shell find . -name '*.hpp' -type f)
-H_INCLUDE := $(sort $(addprefix -I, $(dir $(HEADER))))
-INCLUDE := $(H_INCLUDE)
-endif
 
 # vpath
 vpath    %.hpp    $(HEADER_DIR)

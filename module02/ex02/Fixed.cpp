@@ -4,20 +4,15 @@
 
 #include <iostream>
 
-Fixed::Fixed() : raw_bits_(0) {};
+Fixed::Fixed() : raw_bits_(0){};
 
-Fixed::Fixed(const int n) : raw_bits_(n << frac_bits_) {
-}
+Fixed::Fixed(const int n) : raw_bits_(n << frac_bits_) {}
 
-Fixed::Fixed(const float n) {
-  set_raw_bits(n * roundf(1 << frac_bits_));
-}
+Fixed::Fixed(const float n) { set_raw_bits(n * roundf(1 << frac_bits_)); }
 
-Fixed::Fixed(const Fixed &src) {
-  *this = src;
-}
+Fixed::Fixed(const Fixed &src) { *this = src; }
 
-Fixed::~Fixed() {};
+Fixed::~Fixed(){};
 
 int Fixed::get_raw_bits() const { return raw_bits_; }
 
@@ -112,7 +107,6 @@ Fixed &Fixed::operator--() {
   raw_bits_--;
   return *this;
 }
-
 
 Fixed Fixed::operator--(int) {
   Fixed copy(*this);

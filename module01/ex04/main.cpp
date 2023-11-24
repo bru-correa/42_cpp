@@ -7,7 +7,10 @@
 void OpenInfile(std::ifstream &infile, const char *filename) {
   infile.open(filename);
   if (infile.is_open() == false) {
-    std::cout << "The given filename is invalid\n";
+    std::cerr << "The given filename is invalid\n";
+    std::exit(1);
+  } else if (infile.peek() == std::ifstream::traits_type::eof()) {
+    std::cerr << "The given file is empty\n";
     std::exit(1);
   }
 }
@@ -17,7 +20,7 @@ void OpenOutfile(std::ofstream &outfile, const char *filename) {
   outfilename.append(".replace");
   outfile.open(outfilename.c_str(), std::ios::out | std::ios::trunc);
   if (outfile.is_open() == false) {
-    std::cout << "Could not create output file\n";
+    std::cerr << "Could not create output file\n";
     std::exit(1);
   }
 }
@@ -46,7 +49,7 @@ void ReplaceFile(std::ifstream &infile, std::ofstream &outfile, const char *s1,
 
 int main(int argc, char *argv[]) {
   if (argc < 4) {
-    std::cout << "Invalid arguments!\n";
+    std::cerr << "Invalid arguments!\n";
     return 1;
   }
   std::ifstream infile;
