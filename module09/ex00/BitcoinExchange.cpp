@@ -60,14 +60,10 @@ void BitcoinExchange::PrintExchangeRate(const std::string &line) const {
 
 std::string BitcoinExchange::GetLineDate(const std::string &line) const {
   if (line.empty()) throw InvalidInput();
-  try {
-    CheckDateFormat(line);
-    CheckDate(line);
-    if (line.substr(10, 3) != " | ") throw InvalidInput();
-    return line.substr(0, 10);
-  } catch (const std::exception &e) {
-    throw e;
-  }
+  CheckDateFormat(line);
+  CheckDate(line);
+  if (line.substr(10, 3) != " | ") throw InvalidInput();
+  return line.substr(0, 10);
 }
 
 void BitcoinExchange::CheckDateFormat(const std::string &line) const {

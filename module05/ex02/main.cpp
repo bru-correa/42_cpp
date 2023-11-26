@@ -43,8 +43,9 @@ void TestRobotomy() {
 }
 
 void TestPresidentialPardon() {
-  std::cout << BLUE << "--------------- ROBOTOMY TESTS --------------" << RESET
-            << "\n";
+  std::cout << BLUE
+            << "--------------- PRESIDENTIAL PARDON TESTS --------------"
+            << RESET << "\n";
   try {
     std::cout << "[TEST] Valid Presidential Pardon:\n";
     Bureaucrat mark("Mark", 1);

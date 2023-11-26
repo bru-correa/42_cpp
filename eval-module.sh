@@ -1,4 +1,11 @@
-# TODO: Copy module files to an evaluation folder
-# TODO: Make fclean
-# TODO: Remove dev part in Makefile and insert .cpp and .hpp files
-# TODO: Init git and set remote to vogsphere
+module=$(find . -maxdepth 1 -type d | grep module | sort | fzf)
+
+cp -r $module ../evals_cpp
+cd ../evals_cpp
+module_count=$(ls */ | grep module | wc -l)
+cd ./module0${module_count}
+
+git init
+setup-personal
+git add .
+git commit -m "First commit"

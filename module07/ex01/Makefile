@@ -18,7 +18,7 @@ H_INCLUDE := $(addprefix -I, $(HEADER_DIR))
 
 # Sources
 SRC_DIR := .
-SRC :=
+SRC := main.cpp
 
 # Objects
 OBJ_DIR := obj

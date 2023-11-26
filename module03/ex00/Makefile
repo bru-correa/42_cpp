@@ -18,23 +18,13 @@ H_INCLUDE := $(addprefix -I, $(HEADER_DIR))
 
 # Sources
 SRC_DIR := .
-SRC :=
+SRC := ClapTrap.cpp main.cpp
 
 # Objects
 OBJ_DIR := obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 # Inclusions:
-INCLUDE := $(H_INCLUDE)
-
-# Development
-CFLAGS += -g
-SRC := $(shell find . -name '*.cpp' -type f)
-SRC_DIR := $(dir $(SRC))
-SRC := $(notdir $(SRC))
-OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
-HEADER := $(shell find . -name '*.hpp' -type f)
-H_INCLUDE := $(sort $(addprefix -I, $(dir $(HEADER))))
 INCLUDE := $(H_INCLUDE)
 
 # vpath

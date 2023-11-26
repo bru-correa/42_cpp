@@ -7,6 +7,10 @@ int main(int argc, char **argv) {
     std::cerr << "Invalid arguments\n";
     return 1;
   }
-  BitcoinExchange btc(std::string("./data.csv"));
-  btc.ParseFile(std::string(argv[1]));
+  try {
+    BitcoinExchange btc(std::string("./data.csv"));
+    btc.ParseFile(std::string(argv[1]));
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << "\n";
+  }
 }

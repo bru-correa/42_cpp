@@ -43,33 +43,53 @@ bool RPN::isOperator(const char c) const {
   }
 }
 
+// void RPN::ExecuteOperation(const std::string input) {
+//   if (input.empty())
+//     throw InvalidInput();
+//   else if (isOperator(input[0]))
+//     throw InvalidInput();
+//   int operations_count = 0;
+//   for (size_t i = 0; i < input.length(); i++) {
+//     if (input[i] == ' ')
+//       continue;
+//     else if (IsOperand(input[i])) {
+//       if (stack_.size() == 2)
+//         throw InvalidInput();
+//       else if (i > 0 && std::isdigit(input[i - 1]))
+//         throw InvalidInput();
+//       stack_.push(input[i] - '0');
+//     } else if (isOperator(input[i])) {
+//       PushResult(input[i]);
+//       operations_count++;
+//     }
+//     if (operations_count > 6) throw TooManyOperations();
+//   }
+//   std::cout << "Result: " << stack_.top() << "\n";
+//   stack_.pop();
+// }
+
 void RPN::ExecuteOperation(const std::string input) {
   if (input.empty())
     throw InvalidInput();
-  else if (isOperator(input[input.length() - 1]) == false)
+  else if (isOperator(input[0]))
     throw InvalidInput();
-  int operations_count = 0;
   for (size_t i = 0; i < input.length(); i++) {
     if (input[i] == ' ')
       continue;
     else if (IsOperand(input[i])) {
-      if (stack_.size() == 2)
-        throw InvalidInput();
-      else if (i > 0 && std::isdigit(input[i - 1]))
-        throw InvalidInput();
+      if (i > 0 && std::isdigit(input[i - 1])) throw InvalidInput();
       stack_.push(input[i] - '0');
     } else if (isOperator(input[i])) {
+      if (stack_.size() < 2) throw InvalidOperator();
       PushResult(input[i]);
-      operations_count++;
     }
-    if (operations_count > 6) throw TooManyOperations();
   }
+  if (stack_.size() != 1) throw InvalidOperands();
   std::cout << "Result: " << stack_.top() << "\n";
   stack_.pop();
 }
 
 void RPN::PushResult(const char c) {
-  if (stack_.size() != 2) throw InvalidInput();
   int a = stack_.top();
   stack_.pop();
   int b = stack_.top();
@@ -95,6 +115,10 @@ int RPN::GetResult(const int a, const int b, const char op) const {
 /* EXCEPTIONS */
 const char *RPN::InvalidInput::what() const throw() { return "Invalid Input"; }
 
-const char *RPN::TooManyOperations::what() const throw() {
-  return "There are too many operations passed as input";
+const char *RPN::InvalidOperator::what() const throw() {
+  return "Invalid operator usage in this expression";
+}
+
+const char *RPN::InvalidOperands::what() const throw() {
+  return "There are not enough operators in this expressions";
 }

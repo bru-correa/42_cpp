@@ -30,7 +30,10 @@ class RPN {
   class InvalidInput : public std::exception {
     virtual const char *what() const throw();
   };
-  class TooManyOperations : public std::exception {
+  class InvalidOperator : public std::exception {
+    virtual const char *what() const throw();
+  };
+  class InvalidOperands : public std::exception {
     virtual const char *what() const throw();
   };
 };
