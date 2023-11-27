@@ -105,7 +105,9 @@ float BitcoinExchange::GetBitcoin(const std::string &line) const {
 
 float BitcoinExchange::GetExchangeRate(const std::string &date) const {
   std::set<std::string>::iterator it = database_.lower_bound(date);
-  if (it != database_.begin() && (*it).substr(0, 10) != date) {
+  if (it == database_.end())
+    it--;
+  else if (it != database_.begin() && (*it).substr(0, 10) != date) {
     --it;
   }
   std::string line((*it));
