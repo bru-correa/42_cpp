@@ -40,8 +40,7 @@ const Fixed &Fixed::max(const Fixed &a, const Fixed &b) {
 
 // Copy Assign
 Fixed &Fixed::operator=(const Fixed &rhs) {
-  if (this != &rhs)
-    this->raw_bits_ = rhs.get_raw_bits();
+  if (this != &rhs) this->raw_bits_ = rhs.get_raw_bits();
   return *this;
 }
 
@@ -98,8 +97,8 @@ Fixed &Fixed::operator++() {
 }
 
 Fixed Fixed::operator++(int) {
+  raw_bits_++;
   Fixed copy(*this);
-  copy.raw_bits_++;
   return copy;
 }
 
@@ -109,8 +108,8 @@ Fixed &Fixed::operator--() {
 }
 
 Fixed Fixed::operator--(int) {
+  raw_bits_--;
   Fixed copy(*this);
-  copy.raw_bits_--;
   return copy;
 }
 
